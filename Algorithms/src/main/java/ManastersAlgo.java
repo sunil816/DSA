@@ -2,9 +2,28 @@ import java.util.ArrayList;
 
 public class ManastersAlgo {
     public static void main(String[] args) {
-        ManastersAlgo manastersAlgo = new ManastersAlgo();
-        String longestPalindrome = manastersAlgo.getLongestPalindrome("abacabacabaded");
-        System.out.println(longestPalindrome);
+        String s = "abcdcbaabcdc";
+        String evenLenPal = getLongestPalindrome(s);
+        System.out.println(evenLenPal);
+        StringBuilder pal = new StringBuilder("$");
+        for(int i=0;i<s.length();i++)
+        {
+            pal.append(s.charAt(i)).append("$");
+        }
+        String temp = getLongestPalindrome(pal.toString());
+        String oddLenPal = "";
+        for(int i=0;i<temp.length();i++)
+        {
+            if(temp.charAt(i) != '$')
+            {
+                oddLenPal  = oddLenPal + temp.charAt(i);
+            }
+        }
+        if(oddLenPal.length() > evenLenPal.length()) {
+            System.out.println(oddLenPal);
+        } else {
+            System.out.println(evenLenPal);
+        }
     }
 
     public static String getLongestPalindrome(String input){
@@ -53,8 +72,7 @@ public class ManastersAlgo {
         return nextPos;
     }
 
-    public static int calculatePalindrome(int index, String input, int currentIndexPalLen)
-    {
+    public static int calculatePalindrome(int index, String input, int currentIndexPalLen) {
         int leftIndex = index - currentIndexPalLen/2 - 1;
         int rightIndex = index + currentIndexPalLen/2 + 1;
         while(leftIndex>=0 && rightIndex<input.length())
